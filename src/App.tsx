@@ -14,7 +14,7 @@ function App() {
   const [draftThread, setDraftThread] = useState<TDraftThread | undefined>(
     undefined
   );
-  const { threads, startNewThread } = useThreads();
+  const { threads, startNewThread, addComment, addReaction } = useThreads();
   const setDraftComment = (newComment: string) => {
     setDraftThread((prevState) => {
       if (prevState && prevState.position) {
@@ -44,7 +44,7 @@ function App() {
         position: draftThread?.position,
         comment: {
           text: draftThread?.comment,
-          reactions: []
+          reactions: [],
         },
       });
       setDraftThread(undefined);
@@ -62,7 +62,15 @@ function App() {
           startThread={handleStartNewThread}
         />
       )}
-      {Object.keys(threads).map(key => (<Thread key={key} id={key} thread={threads[key]} />))}
+      {Object.keys(threads).map((key) => (
+        <Thread
+          key={key}
+          id={key}
+          thread={threads[key]}
+          addComment={addComment}
+          addReaction={addReaction}
+        />
+      ))}
     </div>
   );
 }
