@@ -14,6 +14,6 @@ export type Thread = {
   comments: Comment[];
 };
 
-export type CommentThreads = {
+export type Threads = {
   [key: string]: Thread
 }
